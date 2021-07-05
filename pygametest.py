@@ -13,16 +13,15 @@ pygame.display.set_caption("Unser erstes Pygame-Spiel")
 spielaktiv = True
 
 def repaintCards(*args):
-    global button1,button2,button3,button4
+    global buttons
     screen.fill((70,150,0))
     for arg in args:
         for i in range(len(arg)):
-            arg[i].makeCard()
-    
-    button1 = rectButton(490,1200,"Rematch")
-    button2 = rectButton(800,600,"Hit")
-    button3 = rectButton(800,670,"Stand")
-    button4 = rectButton(490,1270,"Quit")
+            arg[i].makeCard()  
+    buttons.append(rectButton(490,1200,"Rematch"))
+    buttons.append(rectButton(800,600,"Hit"))
+    buttons.append(rectButton(800,670,"Stand"))
+    buttons.append(rectButton(490,1270,"Quit"))
     pygame.display.update()
 
 def makeDeck():
@@ -197,14 +196,11 @@ def getWinner():
     pygame.display.update()
     
 def newGame():
-    global win,cardDeck,button1,button2,button3,button4,players,playerCards,dealerCards,playerReady
+    global win,cardDeck,buttons,players,playerCards,dealerCards,playerReady
     win = False
     cardDeck=makeDeck()
     players = [player(True), player(False)]
-    button1 = ''
-    button2 = ''
-    button3 = ''
-    button4 = ''
+    buttons = []
     repaintCards(cardDeck)
     playerCards=[]
     dealerCards=[]
@@ -237,20 +233,20 @@ while spielaktiv:
                     else: getWinner()
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = event.pos
-            if button1.but.collidepoint(mouse_pos):
+            if buttons[0].but.collidepoint(mouse_pos):
                 newGame()
-            if button2.but.collidepoint(mouse_pos):
+            if buttons[1].but.collidepoint(mouse_pos):
                 takeCard(players[0])
                 if players[0].score>21:
                     getWinner() 
-            if button3.but.collidepoint(mouse_pos):
+            if buttons[2].but.collidepoint(mouse_pos):
                 playerReady = True
                 while not win:
                     makeDealerV()
                     if players[1].score<17:
                         takeCard(players[1])
                     else: getWinner()
-            if button4.but.collidepoint(mouse_pos):
+            if buttons[3].but.collidepoint(mouse_pos):
                 spielaktiv = False
                 quit()
 
