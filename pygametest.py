@@ -161,7 +161,7 @@ def takeCard(player):
         scoreT = "BLACKJACK!"
         myfont = pygame.font.SysFont('Bahnschrift', 35,bold=True)
         scoreText = myfont.render(scoreT, False, (255,255,255))
-        screen.blit(scoreText, (750,300))
+        screen.blit(scoreText, (490,350))
         pygame.display.update()
         win = True
     if players[0].score>21:
